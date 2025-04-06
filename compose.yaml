@@ -1,0 +1,16 @@
+services:
+  voter-dapp:
+    build:
+      context: ./
+    ports:
+      - "5500:5500"
+    restart: unless-stopped
+    init: true
+    environment:
+      NODE_ENV: production
+    # env_file: ./.env  # Uncomment if .env file exists
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge

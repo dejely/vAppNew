@@ -1,0 +1,82 @@
+[
+  {
+    "philsys_id": "123456789012",
+    "name": "Juan Dela Cruz",
+    "fingerprint_registered": true,
+    "data_valid": true,
+    "qualified_to_vote": true,
+    "has_voted": false
+  },
+  {
+    "philsys_id": "987654321098",
+    "name": "Maria Santos",
+    "fingerprint_registered": true,
+    "data_valid": true,
+    "qualified_to_vote": true,
+    "has_voted": false
+  },
+  {
+    "philsys_id": "456789123456",
+    "name": "Jose Ramos",
+    "fingerprint_registered": false,
+    "data_valid": true,
+    "qualified_to_vote": true,
+    "has_voted": false
+  },
+  {
+    "philsys_id": "321654987321",
+    "name": "Anna Lopez",
+    "fingerprint_registered": true,
+    "data_valid": false,
+    "qualified_to_vote": true,
+    "has_voted": false
+  },
+  {
+    "philsys_id": "654987321654",
+    "name": "Carlos Mendoza",
+    "fingerprint_registered": true,
+    "data_valid": true,
+    "qualified_to_vote": false,
+    "has_voted": false
+  },
+  {
+    "philsys_id": "789123456789",
+    "name": "Luzviminda Cruz",
+    "fingerprint_registered": true,
+    "data_valid": true,
+    "qualified_to_vote": true,
+    "has_voted": true
+  },
+  {
+    "philsys_id": "112233445566",
+    "name": "Roberto Uy",
+    "fingerprint_registered": false,
+    "data_valid": false,
+    "qualified_to_vote": false,
+    "has_voted": false
+  },
+  {
+    "philsys_id": "998877665544",
+    "name": "Elena Magpantay",
+    "fingerprint_registered": true,
+    "data_valid": true,
+    "qualified_to_vote": true,
+    "has_voted": false
+  },
+  {
+    "philsys_id": "445566778899",
+    "name": "Ramon Padilla",
+    "fingerprint_registered": true,
+    "data_valid": false,
+    "qualified_to_vote": false,
+    "has_voted": false
+  },
+  {
+    "philsys_id": "334455667788",
+    "name": "Grace Tan",
+    "fingerprint_registered": true,
+    "data_valid": true,
+    "qualified_to_vote": true,
+    "has_voted": false
+  }
+]

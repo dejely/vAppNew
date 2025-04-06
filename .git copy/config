@@ -1,0 +1,20 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+
+[remote "origin"]
+	fetch = +refs/heads/*:refs/remotes/origin/*
+	url = https://github.com/dejely/Voter-dApp
+[http]
+	corsProxy = https://corsproxy.remixproject.org/
+[branch "main"]
+	merge = refs/heads/main
+	remote = origin
+[branch "Test_Branch"]
+	vscode-merge-base = origin/main
+[lfs]
+	repositoryformatversion = 0

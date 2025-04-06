@@ -1,0 +1,22 @@
+{
+  "name": "evoting-app",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "A simple e-voting application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dejely/Voter-dApp.git"
+  },
+  "keywords": [
+    "evoting",
+    "blockchain",
+    "dapp"
+  ],
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

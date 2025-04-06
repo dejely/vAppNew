@@ -1,0 +1,55 @@
+# .dockerignore file for efficient Docker builds
+
+# Node.js dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+out/
+
+# Development artifacts
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Test files
+test/
+tests/
+
+# Debug files
+debug/
+*.log
+
+# Version control
+.git/
+.gitignore
+
+# Environment and secrets
+.env*
+*.env
+*.pem
+*.key
+*.crt
+
+# Documentation
+docs/
+*.md
+README*
+
+# Docker files
+Dockerfile*
+docker-compose*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Project-specific patterns
+LICENSE
+compose.yaml
+
+# Exclude the existing .dockerignore file
+!.dockerignore
