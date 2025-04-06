@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>eVoting DApp</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>eVoting System</h1>
+    
+    <div id="walletSection">
+        <button id="connectWallet">Connect Wallet</button>
+        <p id="walletAddress"></p>
+    </div>
+
+    <div id="comelecSection" style="display: none;">
+        <h2>COMELEC Controls</h2>
+        <input id="voterId" placeholder="Voter ID">
+        <button id="registerVoter">Register Voter</button>
+    </div>
+
+    <div id="votingSection" style="display: none;">
+        <h2>Voting Interface</h2>
+        <input id="voterIdVote" placeholder="Voter ID">
+        <select id="candidates"></select>
+        <button id="castVote">Cast Vote</button>
+    </div>
+
+    <div id="resultsSection">
+        <h2>Results</h2>
+        <ul id="resultsList"></ul>
+    </div>
+</body>
+</html>
