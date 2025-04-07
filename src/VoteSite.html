@@ -12,9 +12,64 @@
         <button onclick="window.location.href='index.html';">Go to Main Site</button>
         <p id="votingSection" style="display: none;">
         <h2>Voting Interface</h2>
-        <input id="voterIdVote" placeholder="Voter ID">
+        <input id="votes" placeholder="Voter ID">
         <select id="candidates"></select>
         <button id="castVote">Cast Vote</button>
     </div>
+    <script>
+        const contractAddress = '0x92EA8EB987A61E517663F78EF8cf43B3986eCf50';
+        const contractABI = [{"inputs":[{"internalType":"string[]","name":"candNames","type":"string[]"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"string","name":"philsys_id","type":"string"},{"indexed":false,"internalType":"string","name":"candidate","type":"string"}],"name":"VoteCasted","type":"event"},{"inputs":[],"name":"COMELEC","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"Government","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_id","type":"string"},{"internalType":"string","name":"candNames","type":"string"}],"name":"Vote","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"candNames","type":"string"}],"name":"allVotes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"}],"name":"count","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"master_list","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_id","type":"string"},{"internalType":"bool","name":"fingerprint","type":"bool"},{"internalType":"bool","name":"_valid","type":"bool"},{"internalType":"bool","name":"_eligible","type":"bool"}],"name":"registerVoter","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"}],"name":"voter","outputs":[{"internalType":"bool","name":"fingerprint_registered","type":"bool"},{"internalType":"bool","name":"data_valid","type":"bool"},{"internalType":"bool","name":"eligible","type":"bool"},{"internalType":"bool","name":"has_voted","type":"bool"}],"stateMutability":"view","type":"function"}]
+
+        let contract;
+        let accounts;
+
+        async function connect(){
+            if (window.ethereum) {
+                accounts = await web3.eth.getAccounts();
+                const account = accounts[0];
+                const web3 = new Web3(window.ethereum);
+                contract = new web3.eth.Contract(contractABI, contractAddress);
+                document.getElementById('votingSection').style.display = 'block';
+
+                loadCandidates();
+            } 
+
+            async function loadsCandidates(){
+                try{
+                const candidates = await contract.methods.master_list(0).call() //fetches cand lists
+                const candidatesSelectDrop = document.getElementById("candidates");
+                candidates.foreach(candidate => {
+                    const option = document.createElement("option");
+                    option.value = candidate;
+                    option.textContent = candidate;
+                    candidatesSelectDrop.appendChild(option);}
+                );
+            }catch (err){
+                console.error("Error loading candidates:", err);
+            }
+        }
+
+        async function Vote(){
+            const voterId = document.getElementById('votes').value;
+            const SelectCand = document.getElementById('candidates').value;
+
+            if (!voterId || !SelectCand){
+                alert("Please enter a valid Voter ID or select a candidate.");
+                return;
+            }
+
+            try{
+                await contract.methods.Vote(voterId, SelectCand).send({ from: accounts[0] });
+                alert("Vote casted successfully!");
+            } catch (err){
+                console.error("Error casting vote:", err);
+                alert("Error casting vote. Please try again.");
+            }
+        }
+
+        window.onload = connect;
+        document.getElementById('castVote').addEventListener('click', Vote);
+    }
+    </script>
 </body>
 </html>
