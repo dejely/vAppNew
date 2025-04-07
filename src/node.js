@@ -54,7 +54,7 @@ async function checkCOMELEC(account) {
 }
 
 function setConnected(account) {
-    document.getElementById('connectWallet').textContent = `Connected: ${account}`;
+    document.getElementById('address').textContent = `Connected: ${account}`;
 }
 
 document.getElementById("connectWallet").addEventListener("click", connectWallet);

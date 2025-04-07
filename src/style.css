@@ -17,18 +17,18 @@ button {
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
-    padding: 25px 32px;
+    padding: 10px 32px;
     text-align: center;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 20px;
-    font-size: 32px;
+    font-size: 25px;
     font-weight: bold;
     font-family: Lucida, monospace;
     height: 70px;
-    width: 400px;
+    width: 500px;
 
 }
 
@@ -91,4 +91,14 @@ p{
     margin-bottom: 20px;
     font-family: Lucida, monospace;
     text-wrap: wrap;
+}
+
+#candidates{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    height: 35px;
+    width: 200px;
 }
