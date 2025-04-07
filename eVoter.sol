@@ -10,8 +10,7 @@ contract eVoting{
 
         bool fingerprint_registered;
         bool data_valid;
-        bool eligible
-        ;
+        bool eligible;
         bool has_voted;
     }
 
