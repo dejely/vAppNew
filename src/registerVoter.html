@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="comelecSection" >
+        <div class="comelec">
+            <div class="election_proper">
+            <button onclick="window.location.href='index.html';">Go to Main Site</button>
+            <div class="white_space"></div>
+            <div class="election_proper">
+                <button id="createElection">Create Election</button>
+                <input id="electionName" placeholder="Election Name">
+                <input id="electionDate" type="date" placeholder="Election Date">
+                <button id="startElection">Start Election</button>
+            </div>
+            </div>
+            <h2>COMELEC Controls</h2>
+            <input id="voterId" placeholder="Voter ID">
+            <button id="registerVoter">Register Voter</button>
+            <p id="regbut"></p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+            if (accounts.length > 0){
+                
+                const account = accounts[0];
+                const id = document.getElementById('voterId').value; // Get the voter ID from the input field
+                const contractAddress = '0xEf8EA51aF4cb4e441d56Fc7938a1D4D303F6Ec1a';
+                const contractABI = [{"inputs":[{"internalType":"string[]","name":"candNames","type":"string[]"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"string","name":"philsys_id","type":"string"},{"indexed":false,"internalType":"string","name":"candidate","type":"string"}],"name":"VoteCasted","type":"event"},{"inputs":[],"name":"COMELEC","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"Government","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_id","type":"string"},{"internalType":"string","name":"candNames","type":"string"}],"name":"Vote","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"candNames","type":"string"}],"name":"allVotes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"}],"name":"count","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"master_list","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_id","type":"string"},{"internalType":"bool","name":"fingerprint","type":"bool"},{"internalType":"bool","name":"_valid","type":"bool"},{"internalType":"bool","name":"_eligible","type":"bool"}],"name":"registerVoter","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"}],"name":"voter","outputs":[{"internalType":"bool","name":"fingerprint_registered","type":"bool"},{"internalType":"bool","name":"data_valid","type":"bool"},{"internalType":"bool","name":"eligible","type":"bool"},{"internalType":"bool","name":"has_voted","type":"bool"}],"stateMutability":"view","type":"function"}]; // Replace with your contract's ABI
+                const web3 = new Web3(ethereum);
+                const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+                const regVote = await contract.methods.registerVoter(
+                    id,
+                    true, // Indicates that the voter's fingerprint is verified
+                    true, // biometric data verified
+                    true //eligibility
+                ).send({from: account});
+            }
+        });
+    </script>
+</body>
+</html>

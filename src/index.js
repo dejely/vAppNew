@@ -32,7 +32,7 @@ async function initializeWeb3() {
         }
     } else {
         alert('Please install MetaMask!');
-    }
+    } 
 }
 
 function initializeContract() {
