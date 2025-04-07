@@ -1,0 +1,27 @@
+{
+  "name": "evoting-app",
+  "version": "1.0.0",
+  "description": "A simple e-voting application",
+  "main": "node.js",
+  "author": "Dejel",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dejely/Voter-dApp.git"
+  },
+  "keywords": [
+    "evoting",
+    "blockchain",
+    "dapp"
+  ],
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ethers": "^6.13.5",
+    "express": "^5.1.0",
+    "react": "^19.1.0"
+  }
+}

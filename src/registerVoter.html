@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="comelecSection" >
+        <div class="comelec">
+            <div class="election_proper">
+            <button onclick="window.location.href='index.html';">Go to Main Site</button>
+            <div class="white_space"></div>
+            <div class="election_proper">
+
+            </div>
+            </div>
+            <h2>COMELEC Controls</h2>
+            <input id="voterId" placeholder="Voter ID">
+            <button id="registerVoter">Register Voter</button>
+            <p id="regbut"></p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        
+       document.getElementById('registerVoter').addEventListener('click', async () => {
+    const id = document.getElementById('voterId').value; // Get the voter ID when the button is clicked
+    if (!id) {
+        alert('Please enter a Voter ID.');
+        return;
+    }
+
+    try {
+        const regVote = await contract.methods.registerVoter(
+            id,
+            true, // Indicates that the voter's fingerprint is verified
+            true, // biometric data verified
+            true  // eligibility
+        ).send({ from: account });
+
+        alert('Voter registered successfully!');
+    } catch (error) {
+        console.error('Error registering voter:', error);
+        alert('Failed to register voter. Check the console for details.');
+    }
+});
+    </script>
+</body>
+</html>

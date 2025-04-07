@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>eVoting System</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script src="node.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>eVoting System</h1>
+    <div>
+        <div id="walletSection">
+            <div class="connect">
+                <button id="connectWallet">Connect Wallet</button>
+                <p id="walletAddress"></p>
+            </div>
+        </div>
+
+        <div id="comelecSection" style="display: none;">
+            <button onclick="window.location.href='registerVoter.html';">Go to COMELEC Dashboard</button>
+        </div>
+
+        <div class="votingSections">
+            <button onclick="window.location.href='VoteSite.html';">Go to Vote Site</button>
+        </div>
+
+        <div class="QR">
+            <button onclick="window.location.href='qr.html';">Go to QR</button>
+        </div>
+
+        <div id="resultsSection">
+            <h2>Results</h2>
+            <ul id="resultsList"></ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Connect to the wallet
+            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+
+            if (accounts.length > 0) {
+                const account = accounts[0];
+                document.getElementById('walletAddress').textContent = account;
+
+                // Fetch the COMELEC address from the contract
+                const com = await contract.methods.COMELEC().call();
+
+                // Check if the connected account is COMELEC
+                if (com.toLowerCase() === account.toLowerCase()) {
+                    document.getElementById('comelecSection').style.display = 'block';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

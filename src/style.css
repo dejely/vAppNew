@@ -1,0 +1,85 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.votingSection{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff;
+}
+
+button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 25px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Lucida, monospace;
+    height: 35px;
+    width: 200px;
+
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green */
+    height: 50px;
+    width: 250px;
+}
+
+h1{
+    font-size: 35px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: Lucida, monospace;
+}
+
+h2{
+    font-size: 25px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: Lucida, monospace;
+}
+
+div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input{
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    font-size: 16px;
+    font-family: Lucida, monospace; 
+}
+
+.election_proper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.white_space{
+    height: 100px;
+    width: 100px;
+}
