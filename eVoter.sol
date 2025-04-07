@@ -10,8 +10,7 @@ contract eVoting{
 
         bool fingerprint_registered;
         bool data_valid;
-        bool eligible
-        ;
+        bool eligible;
         bool has_voted;
     }
 
@@ -24,12 +23,10 @@ contract eVoting{
     event VoteCasted(string philsys_id, string candidate);
 
     constructor(string[] memory candNames){
-        COMELEC = msg.sender;
+        COMELEC = 0x92EA8EB987A61E517663F78EF8cf43B3986eCf50;
         master_list = candNames;
 
     }
-
-    
 
     //Set modifier such that we are able to set certain functions where only the COMELEC can access
     modifier onlyCOMELEC(){
