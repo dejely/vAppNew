@@ -24,18 +24,18 @@ button {
     align-items: center;
     justify-content: center;
     border-radius: 20px;
-    font-size: 16px;
+    font-size: 32px;
     font-weight: bold;
     font-family: Lucida, monospace;
-    height: 35px;
-    width: 200px;
+    height: 70px;
+    width: 400px;
 
 }
 
 button:hover {
     background-color: #45a049; /* Darker green */
-    height: 50px;
-    width: 250px;
+    height: 100px;
+    width: 500px;
 }
 
 h1{
@@ -82,4 +82,13 @@ input{
 .white_space{
     height: 100px;
     width: 100px;
+}
+
+p{
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: Lucida, monospace;
+    text-wrap: wrap;
 }
