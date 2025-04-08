@@ -36,6 +36,8 @@ Before setting up the project, ensure you have the following installed:
 git clone https://github.com/dejely/vAppNew.git
 ```
 
+**Rename the file in _src/node.js_ to _src/index.js_**
+
 ### Running the Project with Docker (Locally)
 
 To run this project using Docker, follow the steps below:
