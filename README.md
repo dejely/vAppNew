@@ -3,7 +3,7 @@
 A decentralized application (dApp) for secure and transparent voting, utilizing blockchain technology.
 
 ## Live Access
-- [Website Link](https://dejely.github.io/vAppNew/)
+[Website Link](https://dejely.github.io/vAppNew/)
 
 ## Overview
 
