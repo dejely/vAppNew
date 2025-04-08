@@ -12,10 +12,11 @@ To run this project using Docker, follow the steps below:
 2. Build and start the services using Docker Compose:
 
    ```bash
-   docker built -t [app-name] .
+   npm install
+   
    ```
    ```bash
-   npm install
+   docker built -t [app-name] .
    ```
 
 3. Access the application at `http://localhost:5500`.
