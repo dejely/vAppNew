@@ -67,7 +67,24 @@ To run this project using Docker, follow the steps below:
 3. Access the application at `http://localhost:5500`.
 
 ## USAGE
-- Connect MetaMask Wallet
+1. Connect to your MetaMask Wallet
+2. COMELEC Only:
+   - Register a Voter
+   - Add a Candidate
+   - Reset Voter vote weight
+3. Cast a Vote
+   - Select a candidate to vote via drop down
+   - Type your VoteID
+4. View Live Results
+   - Results are displayed below
+5. QR Scanning
+   - Uses PhilSys with a Mock Dataset registered in the chain
+  
+# Smart Contract Details
+The core of the application is the eVoter.sol smart contract, located in the root directory. It handles:
+- Voter Verification and Registration
+- Candidate addition and management
+- Voting and counting of Votes
 
 ### Configuration Details
 
