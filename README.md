@@ -5,28 +5,25 @@ A decentralized application (dApp) for secure and transparent voting, utilizing 
 ## Table of Contents
 - [Overview](#Overview)
 
-
-##
-
-### Overview
+## Overview
 
 **Voter dApp** is built to provide a secure, transparent, and decentralized election system.
 
-# Features
+## Features
 
 - **COMELEC Management**: A user with a specified address can  _Add_ candidates and  _Register_  voters
 - **Decentralized voting**: Eliminates the possibility of one party Monopoly.
 - **Records**: Records are stored in the chain, which is tamper-proof.
 - **Live Vote-Counting**: End-users will be able to see the vote count after they vote.
 
-### Prerequisites
+## Prerequisites
 
 Before setting up the project, ensure you have the following installed:
 
 - [Docker](https://docs.docker.com/get-started/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-
+- [MetaMask](https://metamask.io/download)
 
 ## Installation
 
@@ -67,7 +64,10 @@ To run this project using Docker, follow the steps below:
    ### NOTE:
    If problems persist, **recontainerize** the directory. 
 
-4. Access the application at `http://localhost:5500`.
+3. Access the application at `http://localhost:5500`.
+
+## USAGE
+- Connect MetaMask Wallet
 
 ### Configuration Details
 
@@ -76,7 +76,6 @@ To run this project using Docker, follow the steps below:
 - The `NODE_ENV` environment variable is set to `production`.
 
 ### Notes
-
 - If additional environment variables are required, create a `.env` file in the project root and uncomment the `env_file` line in the `docker-compose.yml` file.
 - The application uses a non-root user for enhanced security.
 
