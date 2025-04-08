@@ -64,6 +64,9 @@ To run this project using Docker, follow the steps below:
    docker-compose up --build
    ```
 
+   ### NOTE:
+   If problems persist, **recontainerize** the directory. 
+
 4. Access the application at `http://localhost:5500`.
 
 ### Configuration Details
