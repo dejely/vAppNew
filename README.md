@@ -3,7 +3,7 @@
 A decentralized application (dApp) for secure and transparent voting, utilizing blockchain technology.
 
 ## Table of Contents
--[Overview](#Overview)
+- [Overview](#Overview)
 
 
 ##
