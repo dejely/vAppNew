@@ -15,6 +15,7 @@ A decentralized application (dApp) for secure and transparent voting, utilizing 
 - **Decentralized voting**: Eliminates the possibility of one party Monopoly.
 - **Records**: Records are stored in the chain, which is tamper-proof.
 - **Live Vote-Counting**: End-users will be able to see the vote count after they vote.
+- **Sepolia**: This application uses Sepolia Testnetwork.
 
 ## Prerequisites
 
@@ -24,7 +25,7 @@ Before setting up the project, ensure you have the following installed:
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - [MetaMask](https://metamask.io/download)
-
+- [Sepolia Faucet](https://cloud.google.com/application/web3/faucet/ethereum/sepolia)
 ## Installation
 
 ### To set up the project locally:
