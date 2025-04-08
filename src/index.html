@@ -7,16 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="sidebar">
-        <div id="walletSection">
-        <div class="connect">
-            <button id="connectWallet">Connect Wallet</button>
-            <p id="address">No Wallet Connected.</p>
-        </div>
-    </div>
-    </div>
     <h1>eVoting System</h1>
-
+    <div>
+        <div id="walletSection">
+            <div class="connect">
+                <button id="connectWallet">Connect Wallet</button>
+                <p id="walletAddress"></p>
+            </div>
+        </div>
 
         <div id="comelecSection" style="display: none;">
             <button onclick="window.location.href='registerVoter.html';">Go to COMELEC Dashboard</button>
@@ -24,6 +22,10 @@
 
         <div class="votingSections">
             <button onclick="window.location.href='VoteSite.html';">Go to Vote Site</button>
+        </div>
+
+        <div class="QR">
+            <button onclick="window.location.href='qr.html';">Go to QR</button>
         </div>
 
         <div id="resultsSection">

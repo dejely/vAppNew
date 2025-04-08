@@ -26,8 +26,7 @@ const contractABI = [{"inputs":[{"internalType":"string[]","name":"candNames","t
     "stateMutability": "view", 
     "type": "function"
 }];
-
-const contractAddress = "0xEf8EA51aF4cb4e441d56Fc7938a1D4D303F6Ec1a";
+const contractAddress = "0x463684351D52807786da4d4746773dCB45bEEbDF";
 let web3 = new Web3(window.ethereum);
 let contract = new web3.eth.Contract(contractABI, contractAddress);
 
@@ -52,9 +51,20 @@ async function checkCOMELEC(account) {
         document.getElementById('comelecSection').style.display = 'block';
     }
 }
+async function registerVoter() {
+    const voterId = document.getElementById('voterId').value;
+    const fingerprint = document.getElementById('fingerprint').checked;
+    const valid = document.getElementById('valid').checked;
+    const eligible = document.getElementById('eligible').checked;
 
-function setConnected(account) {
-    document.getElementById('address').textContent = `Connected: ${account}`;
+    try {
+        await contract.methods.registerVoter(voterId, fingerprint, valid, eligible).send({ from: account });
+        alert("Voter registered successfully!");
+    } catch (error) {
+        console.error("Error registering voter:", error);
+    }
 }
-
+function setConnected(account) {
+    document.getElementById('connectWallet').textContent = `Connected: ${account}`;
+}
 document.getElementById("connectWallet").addEventListener("click", connectWallet);

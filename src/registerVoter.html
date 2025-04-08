@@ -13,38 +13,106 @@
             <button onclick="window.location.href='index.html';">Go to Main Site</button>
             <div class="white_space"></div>
             <div class="election_proper">
-                <button id="createElection">Create Election</button>
-                <input id="electionName" placeholder="Election Name">
-                <input id="electionDate" type="date" placeholder="Election Date">
-                <button id="startElection">Start Election</button>
+
             </div>
             </div>
             <h2>COMELEC Controls</h2>
             <input id="voterId" placeholder="Voter ID">
             <button id="registerVoter">Register Voter</button>
             <p id="regbut"></p>
+            <input id="candidateName" placeholder="Candidate Name">
+            <button id="addCandidate">Add Candidate</button>
+            <p id="candidateStatus"></p>
+            <input id="resetVoterId" placeholder="Voter ID to Reset">
+    <button id="resetVote">Reset Voter's Vote</button>
+    <p id="resetStatus"></p>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
     <script>
+        let web3;
         document.addEventListener('DOMContentLoaded', async () => {
-            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-            if (accounts.length > 0){
-                
-                const account = accounts[0];
-                const id = document.getElementById('voterId').value; // Get the voter ID from the input field
-                const contractAddress = '0xEf8EA51aF4cb4e441d56Fc7938a1D4D303F6Ec1a';
-                const contractABI = [{"inputs":[{"internalType":"string[]","name":"candNames","type":"string[]"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"string","name":"philsys_id","type":"string"},{"indexed":false,"internalType":"string","name":"candidate","type":"string"}],"name":"VoteCasted","type":"event"},{"inputs":[],"name":"COMELEC","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"Government","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_id","type":"string"},{"internalType":"string","name":"candNames","type":"string"}],"name":"Vote","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"candNames","type":"string"}],"name":"allVotes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"}],"name":"count","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"master_list","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_id","type":"string"},{"internalType":"bool","name":"fingerprint","type":"bool"},{"internalType":"bool","name":"_valid","type":"bool"},{"internalType":"bool","name":"_eligible","type":"bool"}],"name":"registerVoter","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"}],"name":"voter","outputs":[{"internalType":"bool","name":"fingerprint_registered","type":"bool"},{"internalType":"bool","name":"data_valid","type":"bool"},{"internalType":"bool","name":"eligible","type":"bool"},{"internalType":"bool","name":"has_voted","type":"bool"}],"stateMutability":"view","type":"function"}]; // Replace with your contract's ABI
-                const web3 = new Web3(ethereum);
-                const contract = new web3.eth.Contract(contractABI, contractAddress);
-
-                const regVote = await contract.methods.registerVoter(
-                    id,
-                    true, // Indicates that the voter's fingerprint is verified
-                    true, // biometric data verified
-                    true //eligibility
-                ).send({from: account});
+            if (typeof window.ethereum === 'undefined') {
+                alert('MetaMask is not installed. Please install MetaMask to use this feature.');
+                return;
             }
-        });
+    
+            //acc access
+            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+            const account = accounts[0]; 
+            const contractAddress = '0xCd91A241DF810530a5DF96BE671Bb20908C199a3'; 
+            const contractABI = [{"inputs":[{"internalType":"string[]","name":"candNames","type":"string[]"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"string","name":"philsys_id","type":"string"},{"indexed":false,"internalType":"string","name":"candidate","type":"string"}],"name":"VoteCasted","type":"event"},{"inputs":[],"name":"COMELEC","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"Government","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_id","type":"string"},{"internalType":"string","name":"candNames","type":"string"}],"name":"Vote","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"candidateName","type":"string"}],"name":"addCandidate","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"candNames","type":"string"}],"name":"allVotes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"}],"name":"count","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getMasterListLength","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"master_list","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_id","type":"string"},{"internalType":"bool","name":"fingerprint","type":"bool"},{"internalType":"bool","name":"_valid","type":"bool"},{"internalType":"bool","name":"_eligible","type":"bool"}],"name":"registerVoter","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_id","type":"string"}],"name":"resetVote","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"}],"name":"voter","outputs":[{"internalType":"bool","name":"fingerprint_registered","type":"bool"},{"internalType":"bool","name":"data_valid","type":"bool"},{"internalType":"bool","name":"eligible","type":"bool"},{"internalType":"bool","name":"has_voted","type":"bool"}],"stateMutability":"view","type":"function"}]
+    
+          
+            const web3 = new Web3(window.ethereum);
+            const contract = new web3.eth.Contract(contractABI, contractAddress);
+    
+            
+            document.getElementById('registerVoter').addEventListener('click', async () => {
+                const id = document.getElementById('voterId').value; // Get the voter ID from the input field
+                if (!id) {
+                    alert('Please enter a Voter ID.');
+                    return;
+                }
+    
+                try {
+                    document.getElementById('regbut').textContent = 'Registering voter... Please wait.';
+                    const regVote = await contract.methods.registerVoter(
+                        id,
+                        true, // Fingerprints
+                        false, // Data valid (False; for qr scanning set to true)
+                        true  // Eligibility
+                    ).send({ from: account });
+    
+                    document.getElementById('regbut').textContent = 'Voter registered successfully!';
+                } catch (error) {
+                    console.error('Error registering voter:', error);
+                    document.getElementById('regbut').textContent = 'Failed to register voter.';
+                }
+            });
+
+            //brahhh
+        document.getElementById('addCandidate').addEventListener('click', async () => {
+        const candidateName = document.getElementById('candidateName').value; // Get the candidate name
+        if (!candidateName) {
+            alert('Please enter a candidate name');
+            const existingCandidates = await contract.methods.master_list().call();
+            if (existingCandidates.includes(candidateName)) {
+                alert('Candidate name already exists.');
+                return;
+            }
+        }
+        try {
+            document.getElementById('candidateStatus').textContent = 'Adding candidate... Please wait.';
+            const canD = await contract.methods.addCandidate(candidateName).send({ from: account });
+            document.getElementById('candidateStatus').textContent = 'Candidate added successfully!';
+        } catch (error) {
+            console.error('Error adding candidate:', error);
+            document.getElementById('candidateStatus').textContent = 'Failed to add candidate.';
+        }
+    });
+        document.getElementById('resetVote').addEventListener('click', async () => {
+        const voterId = document.getElementById('resetVoterId').value; //get the voter ID to reset
+        if (!voterId) {
+            alert('Please enter a Voter ID to reset.');
+            return;
+        }
+
+        try {
+            document.getElementById('resetStatus').textContent = 'Resetting voter... Please wait.';
+            await contract.methods.resetVote(voterId).send({ from: account });
+            document.getElementById('resetStatus').textContent = 'Voter reset successfully!';
+        } catch (error) {
+            console.error('Error resetting voter:', error);
+            document.getElementById('resetStatus').textContent = 'Failed to reset voter.';
+        }
+    });
+        });        
+
+        
+    
+
+        
     </script>
 </body>
 </html>

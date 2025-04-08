@@ -4,17 +4,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voting Section</title>
-    <script src="node.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class = "votingSections">
+    <div class="votingSections">
         <button onclick="window.location.href='index.html';">Go to Main Site</button>
-        <p id="votingSection" style="display: none;">
-        <h2>Voting Interface</h2>
-        <input id="voterIdVote" placeholder="Voter ID">
-        <select id="candidates"></select>
-        <button id="castVote">Cast Vote</button>
+        <div id="votingSection" style="display: none;">
+            <h2>Voting Interface</h2>
+            <input id="votes" placeholder="Voter ID">
+            <select id="candidates"></select>
+            <button id="castVote">Cast Vote</button>
+            <h3>Candidate Votes</h3>
+            <ul id="candidateVotes"></ul>
+        </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+    <script>
+
+        const contractAddress = '0xCd91A241DF810530a5DF96BE671Bb20908C199a3';
+        const contractABI = [{"inputs":[{"internalType":"string[]","name":"candNames","type":"string[]"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"string","name":"philsys_id","type":"string"},{"indexed":false,"internalType":"string","name":"candidate","type":"string"}],"name":"VoteCasted","type":"event"},{"inputs":[],"name":"COMELEC","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"Government","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_id","type":"string"},{"internalType":"string","name":"candNames","type":"string"}],"name":"Vote","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"candidateName","type":"string"}],"name":"addCandidate","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"candNames","type":"string"}],"name":"allVotes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"}],"name":"count","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getMasterListLength","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"master_list","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_id","type":"string"},{"internalType":"bool","name":"fingerprint","type":"bool"},{"internalType":"bool","name":"_valid","type":"bool"},{"internalType":"bool","name":"_eligible","type":"bool"}],"name":"registerVoter","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_id","type":"string"}],"name":"resetVote","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"}],"name":"voter","outputs":[{"internalType":"bool","name":"fingerprint_registered","type":"bool"},{"internalType":"bool","name":"data_valid","type":"bool"},{"internalType":"bool","name":"eligible","type":"bool"},{"internalType":"bool","name":"has_voted","type":"bool"}],"stateMutability":"view","type":"function"}]
+
+        let contract;
+        let accounts;
+
+        async function connect() {
+            if (window.ethereum) {
+                const web3 = new Web3(window.ethereum);
+                accounts = await web3.eth.getAccounts();
+                contract = new web3.eth.Contract(contractABI, contractAddress);
+                document.getElementById('votingSection').style.display = 'block';
+                await loadCandidates();
+                await loadCandidateVotes();
+            } else {
+                alert('MetaMask is not installed. Please install MetaMask to use this feature.');
+            }
+        }
+
+        async function loadCandidates() {
+    try {
+        const candidatesCount = await contract.methods.master_list().call(); // Get the total number of candidates
+        const candidatesSelectDrop = document.getElementById("candidates");
+        candidatesSelectDrop.innerHTML = ''; // Clear existing options
+
+        for (let i = 0; i < candidatesCount.length; i++) {
+            const candidate = await contract.methods.master_list(i).call(); // Access each candidate by index
+            const option = document.createElement("option");
+            option.value = candidate;
+            option.textContent = candidate;
+            candidatesSelectDrop.appendChild(option);
+        }
+    } catch (err) {
+        console.error("Error loading candidates:", err);
+    }
+}
+
+        async function loadCandidates() {
+            try {
+                const candidatesCount = await contract.methods.getMasterListLength().call(); // Get the total number of candidates
+                const candidatesSelectDrop = document.getElementById("candidates");
+                candidatesSelectDrop.innerHTML = ''; // Clear existing options
+
+                for (let i = 0; i < candidatesCount; i++) {
+                    const candidate = await contract.methods.master_list(i).call(); // Access each candidate by index
+                    const option = document.createElement("option");
+                    option.value = candidate;
+                    option.textContent = candidate;
+                    candidatesSelectDrop.appendChild(option);
+                }
+            } catch (err) {
+                console.error("Failed loading candidates:", err);
+            }
+        }
+
+        async function loadCandidateVotes() {
+            try {
+                const candidatesCount = await contract.methods.getMasterListLength().call(); // Get the total number of candidates
+                const candidateVotesList = document.getElementById("candidateVotes");
+                candidateVotesList.innerHTML = ''; // Clear existing list
+
+                for (let i = 0; i < candidatesCount; i++) {
+                    const candidate = await contract.methods.master_list(i).call(); //Index access
+                    const votes = await contract.methods.allVotes(candidate).call(); //Call all votes
+                    const listItem = document.createElement("li");
+                    listItem.textContent = `${candidate}: ${votes} votes`;
+                    candidateVotesList.appendChild(listItem);
+                }
+            } catch (err) {
+                console.error("Failed loading candidate votes:", err);
+            }
+        }
+
+        async function checkVoter(voterId) {
+        try {
+            const voter = await contract.methods.voter(voterId).call();
+            console.log("Voter details:", voter);
+            return voter;
+        } catch (err) {
+            console.error("Error fetching voter details:", err);
+            return null;
+        }
+    }
+
+    async function castVote() {
+    const voterId = document.getElementById('votes').value;
+    const selectedCandidate = document.getElementById('candidates').value;
+
+    if (!voterId || !selectedCandidate) {
+        alert("Please enter a valid Voter ID and select a candidate.");
+        return;
+    }
+
+    try {
+        console.log("Voter ID:", voterId);
+        console.log("Selected Candidate:", selectedCandidate);
+        console.log("Account:", accounts[0]);
+
+        // Check voter registration
+        const voter = await checkVoter(voterId);
+        if (!voter || !voter.fingerprint_registered || !voter.data_valid || !voter.eligible) {
+            alert("Voter is not properly registered or not eligible to vote.");
+            return;
+        }
+        if (voter.has_voted) {
+            alert("You have already voted.");
+            return;
+        }
+
+        // Cast the vote
+        await contract.methods.Vote(voterId, selectedCandidate).send({ from: accounts[0] });
+        alert("Vote casted successfully!");
+
+        // Update the candidate votes
+        await loadCandidateVotes();
+    } catch (err) {
+        console.error("Error casting vote:", err);
+        alert("Error casting vote. Please try again.");
+    }
+}
+
+        window.onload = connect;
+        document.getElementById('castVote').addEventListener('click', castVote);
+    </script>
 </body>
 </html>
