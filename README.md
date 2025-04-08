@@ -22,6 +22,7 @@ A decentralized application (dApp) for secure and transparent voting, utilizing 
 Before setting up the project, ensure you have the following installed:
 
 - [Docker](https://docs.docker.com/get-started/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 
