@@ -26,7 +26,7 @@ const contractABI = [{"inputs":[{"internalType":"string[]","name":"candNames","t
     "stateMutability": "view", 
     "type": "function"
 }];
-const contractAddress = "0x463684351D52807786da4d4746773dCB45bEEbDF";
+const contractAddress = "0xCd91A241DF810530a5DF96BE671Bb20908C199a3";
 let web3 = new Web3(window.ethereum);
 let contract = new web3.eth.Contract(contractABI, contractAddress);
 
