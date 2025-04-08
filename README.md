@@ -14,6 +14,9 @@ To run this project using Docker, follow the steps below:
    ```bash
    docker built -t [app-name] .
    ```
+   ```bash
+   npm install
+   ```
 
 3. Access the application at `http://localhost:5500`.
 
