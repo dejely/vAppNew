@@ -29,6 +29,13 @@ Before setting up the project, ensure you have the following installed:
 
 
 ## Installation
+
+### To set up the project locally:
+**Clone the repository**
+```bash
+git clone https://github.com/dejely/vAppNew.git
+```
+
 ### Running the Project with Docker (Locally)
 
 To run this project using Docker, follow the steps below:
