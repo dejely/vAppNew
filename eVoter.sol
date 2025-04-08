@@ -34,6 +34,11 @@ contract eVoting{
         _;
     }
 
+    function addCandidate(string memory candidateName) public onlyCOMELEC {
+        require(bytes(candidateName).length > 0, "Candidate name cannot be empty");
+        master_list.push(candidateName); //push to list
+}
+
     //Register Function
     function registerVoter(string memory _id, bool fingerprint, bool _valid, bool _eligible
     ) public onlyCOMELEC{
@@ -67,7 +72,6 @@ contract eVoting{
                 
             } 
         }
-
         require(validCanD, "Invalid Candidate name;");
 
         count[candNames]++;
@@ -76,7 +80,16 @@ contract eVoting{
        emit VoteCasted(_id, candNames);
     }
 
-    function allVotes(string memory candNames) public view onlyCOMELEC returns (uint256){
+    function getMasterListLength() public view returns (uint256) {
+    return master_list.length;
+    }
+
+    function resetVote(string memory _id) public onlyCOMELEC {
+    require(voter[_id].fingerprint_registered, "Voter is not registered.");
+    voter[_id].has_voted = false;
+    }
+
+    function allVotes(string memory candNames) public view returns (uint256){
         return count[candNames];
     }
 
