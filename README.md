@@ -1,4 +1,29 @@
-# Voter-dApp
+# Voter dApp
+
+A decentralized application (dApp) for secure and transparent voting, utilizing blockchain technology.
+-[Overview](#Overview)
+
+
+##
+
+### Overview
+
+**Voter dApp** is built to provide a secure, transparent, and decentralized election system.
+
+# Features
+
+- **COMELEC Management**: A user with a specified address can  _Add_ candidates and  _Register_  voters
+- **Decentralized voting**: Eliminates the possibility of one party Monopoly.
+- **Records**: Records are stored in the chain, which is tamper-proof.
+- **Live Vote-Counting**: End-users will be able to see the vote count after they vote.
+
+### Prerequisites
+
+Before setting up the project, ensure you have the following installed:
+
+- [Docker](https://docs.docker.com/get-started/)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
 
 ## Running the Project with Docker
 
