@@ -1,6 +1,8 @@
 # Voter dApp
 
 A decentralized application (dApp) for secure and transparent voting, utilizing blockchain technology.
+
+## Table of Contents
 -[Overview](#Overview)
 
 
@@ -26,26 +28,31 @@ Before setting up the project, ensure you have the following installed:
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 
-## Running the Project with Docker
+## Installation
+### Running the Project with Docker (Locally)
 
 To run this project using Docker, follow the steps below:
-
-### Prerequisites
 
 ### Build and Run Instructions
 
 1. Navigate to the project root directory.
 2. Build and start the services using Docker Compose:
 
+   #### Navigating Project Directory
    ```bash
-   npm install
-   
-   ```
-   ```bash
-   docker built -t [app-name] .
+   cd src
    ```
 
-3. Access the application at `http://localhost:5500`.
+   #### Install dependencies
+   ```bash
+   npm install
+   ```
+   ```bash
+   docker build -t [app-name] .
+   docker-compose up --build
+   ```
+
+4. Access the application at `http://localhost:5500`.
 
 ### Configuration Details
 
