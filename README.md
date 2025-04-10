@@ -1,4 +1,4 @@
-# Voter dApp
+# Scan a Delegate (ScanDel)
 
 A decentralized application (dApp) for secure and transparent voting, utilizing blockchain technology.
 
