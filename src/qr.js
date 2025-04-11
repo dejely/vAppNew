@@ -94,12 +94,12 @@ document.getElementById("stopBtn").addEventListener("click", () => {
 
 // 👇 Place sendToBlockchain here
 async function sendToBlockchain(userData) {
-    // const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    // const account = accounts[0];
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const account = accounts[0];
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
 
-    const contractAddress = "0x11a2c641733cFBfBa7f7Cf5Bd2b8C830aC9a4F85";
+    const contractAddress = "0xCd91A241DF810530a5DF96BE671Bb20908C199a3";
     const contractABI = [
         {
             "inputs": [
