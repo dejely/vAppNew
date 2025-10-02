@@ -22,7 +22,7 @@ async function initializeWeb3() {
         try {
             await window.ethereum.request({ method: 'eth_requestAccounts' });
             account = (await web3.eth.getAccounts())[0];
-            document.getElementById('walletAddress').textContent = `Connected: ${account}`;
+            document.getElementById('walletAddress');
             initializeContract();
             checkCOMELEC();
             loadCandidates();

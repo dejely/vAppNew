@@ -1,6 +1,7 @@
 # Scan a Delegate (ScanDel)
 
 A decentralized application (dApp) for secure and transparent voting, utilizing blockchain technology.
+Specifically made for Comelec
 
 ## Live Access
 [Website Link](https://dejely.github.io/vAppNew/)
