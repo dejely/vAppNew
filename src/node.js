@@ -41,6 +41,7 @@ async function connectWallet() {
         }
     } else {
         console.error("No web3 provider detected");
+        alert("No web3 provider detected (metamask)");
     }
 }
 
@@ -65,6 +66,6 @@ async function registerVoter() {
     }
 }
 function setConnected(account) {
-    document.getElementById('connectWallet').textContent = `Connected: ${account}`;
+    document.getElementById('connectWallet').textContent = `Connected`;
 }
 document.getElementById("connectWallet").addEventListener("click", connectWallet);
